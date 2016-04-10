@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+    <title></title>
+	<script>
+    $(document).bind('mobileinit',function(){
+        $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+    });
+</script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+	 
+</head>
+<body>
+<div data-role="page" id="pagePrincipale">
+    <div data-role="header">
+        Portail du MHealth
+    </div>
+
+    <div role="main" class="ui-content">
+        <p>
+            <h1>
+            hello <br> it's me
+            </h1>
+        </p>
+        <a class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-inline" href="#popupLogin" data-role="popup" data-position-to="window">connecter</a>
+        <a class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-left ui-btn-inline" href="#pageInscription">s'inscrire</a>
+        <div data-role="popup" id="popupLogin" class="ui-corner-all" data-theme="a">
+           <form action="home.html" method="post" data-ajax="false">  
+           <div style="padding: 2px">
+               <h1>Se connecter</h1>
+               <label for="user">Login :</label>
+               <input type="text" name="user" id="user"/>
+               <label for="pwd">Paswword :</label>
+               <input type="password" name="pwd" id="pwd"/>
+               <button type="submit" class="ui-btn ui-cornel-all ui-icon-check ui-btn-icon-left ui-btn-inline"></button>
+           </div>
+           </form>
+
+
+        </div>
+    </div>
+
+    <div  data-role="footer" data-position="fixed">
+        <h6>all right reserved 2016</h6>
+    </div>
+</div>
+<div data-role="page" id="pageInscription">
+    <div data-role="header">
+        inscription
+        <a href="#pagePrincipale" class="ui-btn ui-corner-all ui-btn-inline header-button-left ui-btn-icon-left ui-icon-caret-l ui-button ui-btn-icon-notext">retour</a>
+    </div>
+    <div role="main" class="ui-content">
+        <input type="text" name="nom" id="nom" placeholder="nom" value=""/>
+        <input type="text" name="prenom" id="prenom" placeholder="prenom" value=""/>
+        <input type="email" name="email" id="email" placeholder="email" value=""/>
+        <input type="password" name="password" id="password" placeholder="mot de pass" value=""/>
+         <input type="password" name="cpassword" id="cpassword" placeholder="comfirmation" value="" autocomplete="off" />
+          <input type="tel" name="tel" id="tel" placeholder="telephone" value="" required pattern="[\00216]\d{8}" />
+          <date type="date" name="date" id="date"/>
+          <select name="sexe" id="sexe" data-role="slider">
+              <option  value="M">M</option>
+              <option  value="F">F</option>
+          </select>
+          <a class="ui-btn ui-corner-all ui-icon-right ui-btn-icon-left ui-btn-inline">connecter</a>
+    </div>
+</div>
+</body>
+</html>
