@@ -14,40 +14,53 @@
         $.mobile.hashListeningEnabled = false;
         $.mobile.pushStateEnabled = false;
     });
+	
+	
+	
+	
+	
+		$("a[data-role=tab]").each(function () {
+		var anchor = $(this);
+		anchor.bind("click", function () {
+			$.mobile.changePage(anchor.attr("href"), {
+				transition: "none",
+				changeHash: false
+			});
+			return false;
+		});
+	});
+
+	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
+		$.mobile.silentScroll(0);
+		$.mobile.changePage.defaults.transition = 'slide';
+	});
 </script>
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
 	 <script type="text/javascript" src="js/index.js"></script>
 	 
 </head>
 <body>
-<div data-role="page" id="page1">
-  <!--<div data-role="header">
-    <h1>jQuery Mobile Example</h1>
-  </div>
-  -->
-  <div role="main" class="ui-content">
-    <div data-role="tabs">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#evennement_a_venir" class="ui-btn-active" inline="true">evennement à venir</a></li>
-          <li><a href="#recherche_evennement" inline="true">recherche evennement</a></li>
-          <li><a href="#ajout_evennement" inline="true">ajout evennement</a></li>
-        </ul>
-      </div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  <!-- ce partie sera travailer par Fakhreddine-->
-	  <div id="evennement_a_venir">
-		<div>
-			<div data-role="header">
-				<h1>Evennements a venir</h1>
-			</div>
-			<div role="main" class="ui-content">
-				<!-- corp de page toute le travail ce fait ici-->
+	<!--<div id="home" data-role="page">
+		<div data-role="header">
+			<h1>Home</h1>
+		</div>
+		<div data-role="content">
+			<p>
+				<a href="#page-1">Page 1</a>
+			</p>
+		</div>
+	</div>
+-->
+	<div id="avenir" data-role="page">
+		<div data-role="header">
+			<!--<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back" data-transition="slide" data-direction="reverse">Back</a>-->
+			<h1>Page 1</h1>
+		</div>
+		<div data-role="content">
+			
+			
+			
+			<!-- corp de page toute le travail ce fait ici-->
 				<p>partie fakhreddine</p>
 				
 			<ul data-role="listview">
@@ -80,43 +93,38 @@
 				</a>
 			<li>
 		</ul>	
-				
-				
-				
-				
-				
-			</div>
-			<div data-role="footer" data-position="fixed">
-				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#avenir" data-role="tab" data-icon="grid" class="ui-btn-active">evennement a venir</a></li>
+					<li><a href="#search" data-role="tab" data-icon="grid">rechercher un evennement</a></li>
+					<li><a href="#add_login" data-role="tab" data-icon="grid" >Ajout evennement</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	<!-- ce partie sera travailer par Fatma-->
-	 <div id="recherche_evennement">
-      <div>
-			<div data-role="header">
-				<h1>Recherche des evennements</h1>
-			</div>
-			<div role="main" class="ui-content">
-				<!-- corp de page toute le travail ce fait ici-->
+
+	<div id="search" data-role="page">
+		<div data-role="header">
+			<!--<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back" data-transition="slide" data-direction="reverse">Back</a>-->
+			<h1>Page 2</h1>
+		</div>
+		<div data-role="content">
+			<!-- corp de page toute le travail ce fait ici-->
 				<p>partie fatma</p>
 				
 				<ul data-role="listview">
@@ -155,135 +163,173 @@
 				
 				
 				
-			</div>
-			<div data-role="footer" data-position="fixed">
-				
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#avenir" data-role="tab" data-icon="grid">evennement a venir</a></li>
+					<li><a href="#search" data-role="tab" data-icon="grid" class="ui-btn-active">rechercher un evennement</a></li>
+					<li><a href="#add_login" data-role="tab" data-icon="grid" >Ajout evennement</a></li>
+				</ul>
 			</div>
 		</div>
+	</div>
+
+	<div id="add_login" data-role="page">
+		<div data-role="header">
+			<!--<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back" data-transition="slide" data-direction="reverse">Back</a>-->
+			<h1>login</h1>
 		</div>
-		
+		<div data-role="content">
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- ce partie sera travailer par Zied-->
-	<div id="ajout_evennement">
-      <div >
-			<div data-role="header">
-				<h1>Ajouter un evennement</h1>
+        <a href="#popupLogin"  data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">connecter</a>
+        <a class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-left ui-btn-inline" href="#pageInscription">s'inscrire</a>
+        <div data-role="popup" id="popupLogin" class="ui-corner-all" data-theme="a">
+           <form action="#ajoutevent" method="post" data-ajax="false">  
+           <div style="padding: 2px">
+               <h1>Se connecter</h1>
+               <label for="user">Login :</label>
+               <input type="text" name="user" id="user"/>
+               <label for="pwd">Paswword :</label>
+               <input type="password" name="pwd" id="pwd"/>
+               <button type="submit" class="ui-btn ui-cornel-all ui-icon-check ui-btn-icon-left ui-btn-inline"></button>
+           </div>
+           </form>
+
+
+        </div>
+			
+			
+			
+			
+			
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#avenir" data-role="tab" data-icon="grid">evennement a venir</a></li>
+					<li><a href="#search" data-role="tab" data-icon="grid">rechercher un evennement</a></li>
+					<li><a href="#add_login" data-role="tab" data-icon="grid"  class="ui-btn-active">Ajout evennement</a></li>
+				</ul>
 			</div>
-			<div role="main" class="ui-content">
-				<!-- corp de page toute le travail ce fait ici-->
-				
-				<p>partie zied</p>
-				 <input type="text" name="nom" id="nom" placeholder="nom" value=""/>
-        <input type="text" name="prenom" id="prenom" placeholder="prenom" value=""/>
-        <input type="email" name="email" id="email" placeholder="email" value=""/>
-        <input type="password" name="password" id="password" placeholder="mot de pass" value=""/>
-         <input type="password" name="cpassword" id="cpassword" placeholder="comfirmation" value="" autocomplete="off" />
-          <input type="tel" name="tel" id="tel" placeholder="telephone" value="" required pattern="[\00216]\d{8}" />
-          <date type="date" name="date" id="date"/>
-          <select name="sexe" id="sexe" data-role="slider">
-              <option  value="M">M</option>
-              <option  value="F">F</option>
-          </select>
-          <a class="ui-btn ui-corner-all ui-icon-right ui-btn-icon-left ui-btn-inline">connecter</a>
-				<div>
-<a href="#idPageEvennement">connecter</a>
-</div>
-<div id="idPageEvennement">
-<div role="main" class="ui-content" >
-<!--nom de l'evennement-->
-  <div date-role="fieldcontain">
-    <label for="nom evennement">nom de l'evennement</label>
-    <input type="text" name="nom evennement" id="nom evennement"></input>
-  </div>
-
+		</div>
+	</div>
+	
+	<div data-role="page" id="pageInscription">
+		<div data-role="header">
+		<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back" data-transition="slide" data-direction="reverse">Back</a>
+			<h1>inscription</h1>
+			<!--<a href="#pagePrincipale" class="ui-btn ui-corner-all ui-btn-inline header-button-left ui-btn-icon-left ui-icon-caret-l ui-button ui-btn-icon-notext">retour</a>-->
+		</div>
+		<div role="main" class="ui-content">
+			<input type="text" name="nom" id="nom" placeholder="nom" value=""/>
+			<input type="text" name="prenom" id="prenom" placeholder="prenom" value=""/>
+			<input type="email" name="email" id="email" placeholder="email" value=""/>
+			<input type="password" name="password" id="password" placeholder="mot de pass" value=""/>
+			<input type="password" name="cpassword" id="cpassword" placeholder="comfirmation" value="" autocomplete="off" />
+			<input type="tel" name="tel" id="tel" placeholder="telephone" value="" required pattern="[\00216]\d{8}" />
+			<date type="date" name="date" id="date"/>
+			<select name="sexe" id="sexe" data-role="slider">
+				<option  value="M">M</option>
+				<option  value="F">F</option>
+			</select>
+			<a class="ui-btn ui-corner-all ui-icon-right ui-btn-icon-left ui-btn-inline" href="#ajoutevent">connecter</a>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#avenir" data-role="tab" data-icon="grid">evennement a venir</a></li>
+					<li><a href="#search" data-role="tab" data-icon="grid">rechercher un evennement</a></li>
+					<li><a href="#add_login" data-role="tab" data-icon="grid" class="ui-btn-active">Ajout evennement</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div data-role="page" id="ajoutevent">
+		<div data-role="header">
+		<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back" data-transition="slide" data-direction="reverse">Back</a>
+			<h1>inscription</h1>
+			<!--<a href="#pagePrincipale" class="ui-btn ui-corner-all ui-btn-inline header-button-left ui-btn-icon-left ui-icon-caret-l ui-button ui-btn-icon-notext">retour</a>-->
+		</div>
+		<div role="main" class="ui-content">	
+			<!--nom de l'evennement-->
+				<div date-role="fieldcontain">
+					<label for="nom evennement">nom de l'evennement</label>
+					<input type="text" name="nom evennement" id="nom evennement"></input>
+				</div>
 				<!--date de l'evennement-->
-				 <div date-role="fieldcontain">
-    <label for="date evennement">Date</label>
-    <input type="date" data-role="date" data-inline="true">
-       </div>
-
+				<div date-role="fieldcontain">
+					<label for="date evennement">Date</label>
+					<input type="date" data-role="date" data-inline="true">
+				</div>
 				<!--heure de l'evennement-->
-         <div date-role="fieldcontain">
-    <label for="heure evennement">Heure</label>
-     <input type="time" data-role="time">
-
-
-
-        <!--affiche de l'evennement-->
-              <div date-role="fieldcontain">
-    <label for="affiche evennement">Affiche</label>
-        <iframe src="" width="80" height="60" align="middle"></iframe>
-        
-        <!--localisation de l'evennement-->
-				 <div date-role="fieldcontain">
-    <label for="localisation evennement">Localisation</label>
-       <select name="liste" id="liste">
-       <option value="Ariana">Ariana </option>
-       <option value="Béja">Béja</option>
-       <option value="Ben Arous">Ben Arous</option>
-       <option value="Bizerte">Bizerte </option>
-       <option value="Gabès">Gabès </option>
-       <option value="Gafsa">Gafsa </option>
-       <option value="Jendouba">Jendouba </option>
-       <option value="Kairouan">Kairouan </option>
-       <option value="Kasserine">Kasserine </option>
-       <option value="Kébili">Kébili </option>
-       <option value="Le Kef">Le Kef </option>
-       <option value="Mahdia">Mahdia </option>
-       <option value="Manouba">Manouba </option>
-       <option value="Médenine">Médenine </option>
-       <option value="Monastir">Monastir </option>
-       <option value="Nabeul">Nabeul </option>
-        <option value="sfax">sfax </option>
-        <option value="Sidi Bouzid ">Sidi Bouzid </option>
-        <option value="Siliana">Siliana </option>
-        <option value="Sousse">Sousse </option>
-        <option value="Tatauoine">Tatauoine </option>
-        <option value="Tozeur">Tozeur </option>
-        <option value="Tunis">Tunis </option>
-        <option value="Zaghouan">Zaghouan </option>
-       </select>
-      </div>
-        <!--organisateur de l'evennement-->
-         <div date-role="fieldcontain">
-    <label for="organisateur evennement">Organisateur</label>
-         <input type="text" name="organisateur evennement" id="organisateur evennement"></input>
-
-        <!--details de l'evennement-->
-       <div date-role="fieldcontain">
-    <label for="details evennement">Details </label>       
-       <textarea cols="20" rows="10" name="details" id="details"></textarea>
-        
-       <!--prix de l'evennement-->
-        <div date-role="fieldcontain">
-    <label for="prix evennement">Prix </label>
-    <input type="text" name="prx" id="prx"></input>
-    <a href="index.html" data-role="button" data-inline="true" data-theme="b" >valider </a>
-    <a href="index.html" data-role="button" data-inline="true">annuler</a>
-  
-       
-
-			<div data-role="footer" data-position="fixed">
-				
+				<div date-role="fieldcontain">
+					<label for="heure evennement">Heure</label>
+					<input type="time" data-role="time">
+				</div>
+				<!--affiche de l'evennement-->
+				<div date-role="fieldcontain">
+					<label for="affiche evennement">Affiche</label>
+					<iframe src="" width="80" height="60" align="middle"></iframe>
+				</div>
+				<!--localisation de l'evennement-->
+				<div date-role="fieldcontain">
+					<label for="localisation evennement">Localisation</label>
+					<select name="liste" id="liste">
+					<option value="Ariana">Ariana </option>
+					<option value="Béja">Béja</option>
+					<option value="Ben Arous">Ben Arous</option>
+					<option value="Bizerte">Bizerte </option>
+					<option value="Gabès">Gabès </option>
+					<option value="Gafsa">Gafsa </option>
+					<option value="Jendouba">Jendouba </option>
+					<option value="Kairouan">Kairouan </option>
+					<option value="Kasserine">Kasserine </option>
+					<option value="Kébili">Kébili </option>
+					<option value="Le Kef">Le Kef </option>
+					<option value="Mahdia">Mahdia </option>
+					<option value="Manouba">Manouba </option>
+					<option value="Médenine">Médenine </option>
+					<option value="Monastir">Monastir </option>
+					<option value="Nabeul">Nabeul </option>
+					<option value="sfax">sfax </option>
+					<option value="Sidi Bouzid ">Sidi Bouzid </option>
+					<option value="Siliana">Siliana </option>
+					<option value="Sousse">Sousse </option>
+					<option value="Tatauoine">Tatauoine </option>
+					<option value="Tozeur">Tozeur </option>
+					<option value="Tunis">Tunis </option>
+					<option value="Zaghouan">Zaghouan </option>
+					</select>
+				</div>
+				<!--organisateur de l'evennement-->
+				<div date-role="fieldcontain">
+					<label for="organisateur evennement">Organisateur</label>
+					<input type="text" name="organisateur evennement" id="organisateur evennement"></input>
+				</div>
+				<!--details de l'evennement-->
+				<div date-role="fieldcontain">
+					<label for="details evennement">Details </label>       
+					<textarea cols="20" rows="10" name="details" id="details"></textarea>
+				</div>
+				<!--prix de l'evennement-->
+				<div date-role="fieldcontain">
+				<label for="prix evennement">Prix </label>
+				<input type="text" name="prx" id="prx"></input>
+				</div>
+				<a href="index.html" data-role="button" data-inline="true" data-theme="b" >valider </a>
+				<a href="index.html" data-role="button" data-inline="true">annuler</a>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#avenir" data-role="tab" data-icon="grid">evennement a venir</a></li>
+					<li><a href="#search" data-role="tab" data-icon="grid">rechercher un evennement</a></li>
+					<li><a href="#add_login" data-role="tab" data-icon="grid" class="ui-btn-active">Ajout evennement</a></li>
+				</ul>
 			</div>
 		</div>
-		</div>
-		
-		
-    </div>
 	</div>
-	</div>
-
 </body>
 </html>
